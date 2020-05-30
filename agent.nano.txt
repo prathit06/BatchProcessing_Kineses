@@ -1,0 +1,22 @@
+{
+  "cloudwatch.emitMetrics": true,
+  "kinesis.endpoint": "",
+  "firehose.endpoint": "",
+
+  "awsAccessKeyId": "",			#If not using Roles.
+  "awsSecretAccessKey": "",		#If not using Roles.
+
+  "flows": [
+    {
+      "filePattern": "/var/log/<Folder Name>/*.log",		#Specify your Folder name.
+      "kinesisStream": "CadabraOrders",
+      "partitionKeyOption": "RANDOM",
+      "dataProcessingOptions": [
+         {
+            "optionName": "CSVTOJSON",
+            "customFieldNames": ["InvoiceNo", "StockCode", "Description", "Quantity", "InvoiceDate", "UnitPrice", "Customer", "Country"]
+         }
+      ]
+    }
+  ]
+}
