@@ -7,8 +7,7 @@ sourceData = "OnlineRetail.csv"
 def GetLineCount():
     with open(sourceData) as f:
         for i, l in enumerate(f):
-            if(i>=numLines):
-              break           
+            pass         
     return i
  
 def MakeLog(startLine, numLines):
