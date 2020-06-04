@@ -1,23 +1,23 @@
 import csv
 import time
 import sys
-
+ 
 sourceData = "OnlineRetail.csv"
-placeholder = "LastLine.txt"
-
+ 
 def GetLineCount():
     with open(sourceData) as f:
         for i, l in enumerate(f):
-            pass
+            if(i>=numLines):
+              break           
     return i
-
+ 
 def MakeLog(startLine, numLines):
-    destData = time.strftime("/var/log/<Folder Name>/%Y%m%d-%H%M%S.log")	#Specify your Folder name.
+    destData = time.strftime("cadabra/%Y%m%d-%H%M%S.log")
     with open(sourceData, 'r') as csvfile:
         with open(destData, 'w') as dstfile:
             reader = csv.reader(csvfile)
             writer = csv.writer(dstfile)
-            next (reader) 							#skip header
+            next (reader) #skip header
             inputRow = 0
             linesWritten = 0
             for row in reader:
@@ -31,22 +31,15 @@ def MakeLog(startLine, numLines):
         
     
 numLines = 100
-startLine = 0            
+startLine = 0          
 if (len(sys.argv) > 1):
     numLines = int(sys.argv[1])
-    
-try:
-    with open(placeholder, 'r') as f:
-        for line in f:
-             startLine = int(line)
-except IOError:
-    startLine = 0
-
+ 
 print("Writing " + str(numLines) + " lines starting at line " + str(startLine) + "\n")
-
+ 
 totalLinesWritten = 0
 linesInFile = GetLineCount()
-
+ 
 while (totalLinesWritten < numLines):
     linesWritten = MakeLog(startLine, numLines - totalLinesWritten)
     totalLinesWritten += linesWritten
@@ -55,6 +48,3 @@ while (totalLinesWritten < numLines):
         startLine = 0
         
 print("Wrote " + str(totalLinesWritten) + " lines.\n")
-    
-with open(placeholder, 'w') as f:
-    f.write(str(startLine))
