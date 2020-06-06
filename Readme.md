@@ -1,3 +1,3 @@
-The Project demonstrates Batch Processing using AWS Kinesis Firehose service.
+The Project demonstrates Batch Processing using AWS Kinesis Firehose,S3 and EC2 Services.
 
-Please open "Batch_Firehose.docx" file for the Documentation.
+## Read "Batch_Firehose.docx" file for detailed documentation.
